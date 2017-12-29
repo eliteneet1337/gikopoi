@@ -1,8 +1,12 @@
-
-
+/**
+ * Frontend settings.
+ */
 export default {
   // URL to connect websocket to
   WEBSOCKETS_URL: "ws://localhost:8080/ws",
+
+  // Base URL of assets
+  ASSETS_URL: "static/assets",
 
   // Characters that can be picked from
   CHARACTERS:  [

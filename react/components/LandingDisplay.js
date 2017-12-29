@@ -1,18 +1,20 @@
-
+/**
+ * This component holds the default display when the page is opened.
+ *
+ * This is a page that holds the landing page, displaying the welcome banner and
+ * character selection form.
+ */
 import React from "react";
 import settings from "../settings";
 
 
-/**
- * Page that holds the landing page, displaying the welcome banner and avatar
- * selection form.
- */
 export default class LandingDisplay extends React.Component {
+
   constructor() {
     super();
     this.state = {
-      username: "",
-      selectedChar: null,
+      name: "",
+      character: null,
     };
   }
 
@@ -39,10 +41,10 @@ export default class LandingDisplay extends React.Component {
 
     const charRows = settings.CHARACTERS.map((char) => {
       const rowStyle = {height: "60px"};
-      const onClick = () => this.setState({selectedChar: char.characterName});
+      const onClick = () => this.setState({character: char.characterName});
       var rowClasses = "list-group-item";
 
-      if (this.state.selectedChar == char.characterName) {
+      if (this.state.character == char.characterName) {
         rowClasses += " active";
       }
 
@@ -80,9 +82,9 @@ export default class LandingDisplay extends React.Component {
             <input
               type="text"
               class="form-control"
-              placeholder="Username"
+              placeholder="name"
               value={this.state.value}
-              onChange={(e) => this.setState({username: e.target.value})}
+              onChange={(e) => this.setState({name: e.target.value})}
               aria-describedby="basic-addon1" />
           </div>
 
@@ -98,7 +100,8 @@ export default class LandingDisplay extends React.Component {
             href="#"
             class="btn btn-primary"
             role="button"
-            style={buttonStyles}>
+            style={buttonStyles}
+            onClick={() => this.props.onInitOpts(this.state)}>
             LOGIN
           </a>
 

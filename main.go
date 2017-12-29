@@ -11,10 +11,12 @@ import (
   "github.com/gorilla/websocket"
 )
 
+
 var upgrader = websocket.Upgrader{
   ReadBufferSize:  1024,
   WriteBufferSize: 1024,
 }
+
 
 func main() {
   // Parse and set command line flags
@@ -51,20 +53,17 @@ func handleIndex(response http.ResponseWriter, request *http.Request) {
 
 func handleWs(hub *Hub, response http.ResponseWriter, request *http.Request) {
   // Upgrade connection to websocket
-  log.Println("starting upgrade");
   conn, err := upgrader.Upgrade(response, request, nil)
+
   if err != nil {
 		log.Println(err)
 		return
   }
-  log.Println("done upgrading");
+
   // Create new webclient and begin handling events
   var webClient = newWebClient(hub, conn);
 
   go webClient.handleIncomingEvents()
 
-  log.Println("here")
-
   webClient.pumpWebsocketMessages()
-
 }
