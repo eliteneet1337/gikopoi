@@ -1,5 +1,6 @@
 /**
- * The hub is the master object controlling the server as a world and list of
+ * The hub is the master object controlling the server as a world and of users
+ * and rooms.
  *
  * The hub accepts new events through clients thorugh its multiple channels,
  * each channel describing a different type of event. For example, see
